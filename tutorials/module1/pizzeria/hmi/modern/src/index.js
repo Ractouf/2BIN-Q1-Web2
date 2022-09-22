@@ -82,12 +82,11 @@ function renderMenuFromString(menu) {
 
 function getMenuTableAsString(menu) {
     const menuTableLines = getAllTableLinesAsString(menu);
-    const menuTable = addLinesToTableHeadersAndGet(menuTableLines);
-    return menuTable;
+    return addLinesToTableHeadersAndGet(menuTableLines);
 }
 
 function addLinesToTableHeadersAndGet(tableLines) {
-    const menuTable = `
+    return `
   <div class="table-responsive pt-5">
     <table class="table table-danger">
       <tr>
@@ -98,7 +97,6 @@ function addLinesToTableHeadersAndGet(tableLines) {
     </table>
   </div>
   `;
-    return menuTable;
 }
 
 function getAllTableLinesAsString(menu) {
