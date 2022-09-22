@@ -13,12 +13,12 @@ function redLightFunction() {
 
     if (compteur < redLight.length) {
         if (compteur === 0) {
-            redLight[compteur + 1].style.backgroundColor = "transparent"
+            redLight[compteur + 1].style.backgroundColor = ""
         }
         if (direction && compteur !== 0) {
-            redLight[compteur - 1].style.backgroundColor = "transparent"
+            redLight[compteur - 1].style.backgroundColor = ""
         } else {
-            redLight[compteur + 1].style.backgroundColor = "transparent"
+            redLight[compteur + 1].style.backgroundColor = ""
         }
     }
 

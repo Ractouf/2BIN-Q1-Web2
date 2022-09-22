@@ -7,7 +7,7 @@ body {
     /*to easily deal with sticky footer*/
     display: flex;
     flex-direction: column;
-    background-image : url(../img/pizza.jpg);
+    background-image : url(../../modern/src/img/pizza.jpg);
     background-size : cover;
 }
 
