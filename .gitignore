@@ -11,4 +11,4 @@ package-lock.json
 dist/*
 # but (re)include specific dist directory files, e.g.
 #!frontend-essentials/step-1/dist
-tutorials/module1/pizzeria/hmi/modern/dist
+dist
