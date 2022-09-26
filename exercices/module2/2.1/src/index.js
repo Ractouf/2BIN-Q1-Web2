@@ -57,6 +57,8 @@ function createArray(lines, columns, initial) {
     }
     console.log(array)
     createHtmlTableAsString(array);
+
+    const tableau = document.querySelector()
     return array;
 }
 
@@ -70,6 +72,6 @@ function createHtmlTableAsString(array) {
         });
         tableau += `</tr>`
     });
-    console.log(tableau)
+
     return tableau;
 }
