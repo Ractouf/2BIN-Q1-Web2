@@ -1,6 +1,8 @@
+/* eslint-disable */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheets/main.css';
 import pizzaImage from './img/pizza2.jpg';
+import tab from "bootstrap/js/src/tab";
 
 const TEXT = [
     {
@@ -22,7 +24,8 @@ const TEXT = [
 ];
 
 renderPizzaImage(pizzaImage);
-renderText(TEXT)
+renderText(TEXT);
+createArray(5,5,"GUCCI");
 
 function renderText(textJson) {
     let textLines = '';
@@ -35,11 +38,38 @@ function renderText(textJson) {
 
     wrapper.innerHTML += textLines;
 }
-
 function renderPizzaImage(pizzaUrl) {
     const image = new Image(); // or document.createElement('img');
     image.src = pizzaUrl;
     image.height = 200;
     const images = document.querySelector('.images');
     images.appendChild(image);
+}
+
+function createArray(lines, columns, initial) {
+    const array = [];
+
+    for (let i = 0; i < lines; i++) {
+        array.push([]);
+        for (let j = 0; j < columns; j++) {
+            array[i].push(`${initial}[${i}][${j}]`);
+        }
+    }
+    console.log(array)
+    createHtmlTableAsString(array);
+    return array;
+}
+
+function createHtmlTableAsString(array) {
+    let tableau = '';
+
+    array?.forEach((line) => {
+        tableau += `<tr>`;
+        line?.forEach((element) => {
+            tableau += `<td>${element}</td>`;
+        });
+        tableau += `</tr>`
+    });
+    console.log(tableau)
+    return tableau;
 }
