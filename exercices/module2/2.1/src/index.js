@@ -2,7 +2,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheets/main.css';
 import pizzaImage from './img/pizza2.jpg';
-import tab from "bootstrap/js/src/tab";
 
 const TEXT = [
     {
@@ -23,9 +22,19 @@ const TEXT = [
     }
 ];
 
+let lines = document.querySelector("#lines");
+const columns = document.querySelector("#columns");
+const initalText = document.querySelector("#initialText");
+const form = document.querySelector("#form");
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    createTable(lines.value, columns.value, initalText.value);
+})
+
+
 renderPizzaImage(pizzaImage);
 renderText(TEXT);
-createArray(5,5,"GUCCI");
 
 function renderText(textJson) {
     let textLines = '';
@@ -34,7 +43,7 @@ function renderText(textJson) {
         textLines += `<h2>${text.text}</h2>`;
     });
 
-    const wrapper = document.querySelector('.wrapper');
+    const wrapper = document.querySelector('.texte');
 
     wrapper.innerHTML += textLines;
 }
@@ -46,6 +55,14 @@ function renderPizzaImage(pizzaUrl) {
     images.appendChild(image);
 }
 
+function createTable(lines, columns, initial) {
+    let array = createArray(lines, columns, initial);
+    let table = createHtmlTableAsString(array);
+
+    const tableau = document.querySelector(".tableau");
+    tableau.innerHTML += table
+}
+
 function createArray(lines, columns, initial) {
     const array = [];
 
@@ -55,15 +72,11 @@ function createArray(lines, columns, initial) {
             array[i].push(`${initial}[${i}][${j}]`);
         }
     }
-    console.log(array)
-    createHtmlTableAsString(array);
-
-    const tableau = document.querySelector()
     return array;
 }
 
 function createHtmlTableAsString(array) {
-    let tableau = '';
+    let tableau = '<table>';
 
     array?.forEach((line) => {
         tableau += `<tr>`;
@@ -72,6 +85,6 @@ function createHtmlTableAsString(array) {
         });
         tableau += `</tr>`
     });
-
+    tableau += '</table>'
     return tableau;
 }
