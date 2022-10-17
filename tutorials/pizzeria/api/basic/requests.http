@@ -7,6 +7,12 @@ GET http://localhost:3000/pizzas/?order=+title
 ### Read all pizzas sorted by title (descending)
 GET http://localhost:3000/pizzas/?order=-title
 
+### Read all pizzas filtered by content
+GET http://localhost:3000/pizzas/?content="Jalapenos"
+
+### Read one
+GET http://localhost:3000/pizzas/2
+
 ### Create a pizza
 POST http://localhost:3000/pizzas
 Content-Type: application/json
