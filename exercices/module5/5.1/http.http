@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 
 ### Delete one
-DELETE http://localhost:3000/films/2
+DELETE http://localhost:3000/films/6
 
 ### Update the pizza identified by 6
 PATCH http://localhost:3000/films/6
