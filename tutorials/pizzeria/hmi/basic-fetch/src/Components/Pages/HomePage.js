@@ -25,7 +25,7 @@ function renderHomePage() {
         },
     ];
 
-    fetch('http://localhost:3000/pizzas')
+    fetch('/api/pizzas')
         .then((response) => {
             if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
             return response.json();
