@@ -7,14 +7,14 @@ const defaultFilms = [
     {
         id: 1,
         title: '4 fromages',
-        duration: 100,
+        duration: 80,
         budget: 20000,
         linkFilm: 'https://www.youtube.com/'
     },
     {
         id: 2,
         title: 'Vegan',
-        duration: 100,
+        duration: 50,
         budget: 20000,
         linkFilm: 'https://www.youtube.com/'
     },
@@ -28,21 +28,21 @@ const defaultFilms = [
     {
         id: 4,
         title: 'Alpage',
-        duration: 100,
+        duration: 200,
         budget: 20000,
         linkFilm: 'https://www.youtube.com/'
     },
     {
         id: 5,
         title: 'Diable',
-        duration: 100,
+        duration: 10,
         budget: 20000,
         linkFilm: 'https://www.youtube.com/'
     }
 ];
 
-function readAllPizzas(filter) {
-    const filterDuration = filter?.includes['minimum-duration']
+function readAllFilms(filter) {
+    const filterDuration = filter > 0
         ? filter
         : undefined;
 
@@ -58,70 +58,86 @@ function readAllPizzas(filter) {
     return filteredFilms ?? films;
 }
 
-function readOnePizza(id) {
+function readOneFilm(id) {
     const idNumber = parseInt(id, 10);
-    const pizzas = parse(jsonDbPath, defaultPizzas);
-    const indexOfPizzaFound = pizzas.findIndex((pizza) => pizza.id === idNumber);
-    if (indexOfPizzaFound < 0) return undefined;
+    const films = parse(jsonDbPath, defaultFilms);
 
-    return pizzas[indexOfPizzaFound];
+    const indexOfFilmFound = films.findIndex((film) => film.id === idNumber);
+    if (indexOfFilmFound < 0) return undefined;
+
+    return films[indexOfFilmFound];
 }
 
-function createOnePizza(title, content) {
-    const pizzas = parse(jsonDbPath, defaultPizzas);
+function createOneFilm(title, duration, budget, linkFilm) {
+    const films = parse(jsonDbPath, defaultFilms);
 
-    const createdPizza = {
+    const createdFilm = {
         id: getNextId(),
         title,
-        content,
+        duration,
+        budget,
+        linkFilm
     };
 
-    pizzas.push(createdPizza);
+    films.push(createdFilm);
 
-    serialize(jsonDbPath, pizzas);
+    serialize(jsonDbPath, films);
 
-    return createdPizza;
+    return createdFilm;
 }
 
 function getNextId() {
-    const pizzas = parse(jsonDbPath, defaultPizzas);
-    const lastItemIndex = pizzas?.length !== 0 ? pizzas.length - 1 : undefined;
+    const films = parse(jsonDbPath, defaultFilms);
+    const lastItemIndex = films?.length !== 0 ? films.length - 1 : undefined;
     if (lastItemIndex === undefined) return 1;
-    const lastId = pizzas[lastItemIndex]?.id;
+    const lastId = films[lastItemIndex]?.id;
     return lastId + 1;
 }
 
-function deleteOnePizza(id) {
+function deleteOneFilm(id) {
     const idNumber = parseInt(id, 10);
-    const pizzas = parse(jsonDbPath, defaultPizzas);
-    const foundIndex = pizzas.findIndex((pizza) => pizza.id === idNumber);
-    if (foundIndex < 0) return undefined;
-    const deletedPizzas = pizzas.splice(foundIndex, 1);
-    const deletedPizza = deletedPizzas[0];
-    serialize(jsonDbPath, pizzas);
+    const films = parse(jsonDbPath, defaultFilms);
 
-    return deletedPizza;
+    const foundIndex = films.findIndex((film) => film.id === idNumber);
+
+    if (foundIndex < 0)
+        return undefined;
+
+    const deletedFilms = films.splice(foundIndex, 1);
+
+    const deletedFilm = deletedFilms[0];
+    serialize(jsonDbPath, films);
+
+    return deletedFilm;
 }
 
-function updateOnePizza(id, propertiesToUpdate) {
+function updateOneFilm(id, propertiesToUpdate) {
     const idNumber = parseInt(id, 10);
-    const pizzas = parse(jsonDbPath, defaultPizzas);
-    const foundIndex = pizzas.findIndex((pizza) => pizza.id === idNumber);
-    if (foundIndex < 0) return undefined;
+    const films = parse(jsonDbPath, defaultFilms);
+    const foundIndex = films.findIndex((film) => film.id === idNumber);
 
-    const updatedPizza = { ...pizzas[foundIndex], ...propertiesToUpdate };
+    if (foundIndex < 0)
+        return undefined;
 
-    pizzas[foundIndex] = updatedPizza;
+    Object.keys(propertiesToUpdate).forEach(key => {
+        if (propertiesToUpdate[key] === undefined) {
+            delete propertiesToUpdate[key];
+        }
+    });
 
-    serialize(jsonDbPath, pizzas);
+    const updatedFilm = { ...films[foundIndex], ...propertiesToUpdate };
 
-    return updatedPizza;
+    films[foundIndex] = updatedFilm;
+
+    serialize(jsonDbPath, films);
+
+    return updatedFilm;
 }
 
 module.exports = {
-    readAllPizzas,
-    readOnePizza,
-    createOnePizza,
-    deleteOnePizza,
-    updateOnePizza,
+    readAllFilms,
+    readOneFilm,
+    createOneFilm,
+    deleteOneFilm,
+    updateOneFilm,
 };

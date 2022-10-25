@@ -170,7 +170,11 @@ router.patch('/:id', (req, res) => {
     if (foundIndex < 0)
         return res.sendStatus(404);
 
+    console.log(films[foundIndex]);
+    console.log(req.body);
+
     const updatedFilm = {...films[foundIndex], ...req.body};
+    console.log(updatedFilm);
     films[foundIndex] = updatedFilm;
 
     serialize(jsonDbPath, films);

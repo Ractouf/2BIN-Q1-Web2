@@ -1,0 +1,31 @@
+### Read all films
+GET http://localhost:3000/films
+
+### Read all filtered
+GET http://localhost:3000/films?minimum-duration=value
+
+### Read one
+GET http://localhost:3000/films/2
+
+### Create one
+POST http://localhost:3000/films
+Content-Type: application/json
+
+{
+  "title": "Magic Green",
+  "duration": 1000,
+  "budget": 204,
+  "linkFilm": "http://localhost:3000"
+}
+
+### Delete one
+DELETE http://localhost:3000/films/6
+
+### Update the pizza identified by 6
+PATCH http://localhost:3000/films/6
+Content-Type: application/json
+
+{
+  "title":"Magic Green 2"
+}
+
