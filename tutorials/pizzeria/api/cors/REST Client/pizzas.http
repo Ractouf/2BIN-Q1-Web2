@@ -1,0 +1,29 @@
+### Read all films
+GET http://localhost:3000/pizzas
+
+### Read all filtered
+GET http://localhost:3000/pizzas?minimum-duration=value
+
+### Read one
+GET http://localhost:3000/pizzas/2
+
+### Create one
+POST http://localhost:3000/pizzas
+Content-Type: application/json
+
+{
+  "title": "Magic Green",
+  "content": "Gruyère"
+}
+
+### Delete one
+DELETE http://localhost:3000/pizzas/6
+
+### Update the pizza identified by 6
+PATCH http://localhost:3000/pizzas/6
+Content-Type: application/json
+
+{
+  "title":"Magic Green 2"
+}
+
