@@ -27,7 +27,7 @@ vous devez avoir installé l'extension **prettier** au sein de VS Code.
     - soit en tapant **Shift Alt F** ;
     - soit en faisant un clic droit sur votre script, **Format Document** ; la première fois, il se peut que vous deviez sélectionner **prettier** comme formater.
 - Pour info, la configuration des règles de **ESLint** se fait dans le fichier 
-**.eslintrc.js** devant se trouver à la racine d'un projet et offert au sein du boilerplate.
+**..eslintrc.js** devant se trouver à la racine d'un projet et offert au sein du boilerplate.
 - Pour info, la configuration des règles de **prettier** se fait dans le fichier 
 **.prettierrc.js** devant se trouver à la racine d'un projet et offert au sein du boilerplate.
 
