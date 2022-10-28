@@ -1,5 +1,8 @@
+import {clearPage} from "../../utils/render";
+
 const HomePage = async () => {
   try {
+    clearPage();
     const joke = await getOneJoke();
     renderJoke(joke);
     clickEvent();
@@ -48,7 +51,7 @@ function renderJoke(joke) {
 
     const button = document.createElement("button");
     button.className = "button"
-    main.innerHTML += `<p>Unsafe joke !</p>`;
+    main.innerHTML += `<p>/!\\ Unsafe joke /!\\ </p>`;
     button.innerText += "Watch";
 
     button.addEventListener("click", () => {
