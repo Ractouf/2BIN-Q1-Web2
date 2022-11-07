@@ -32,7 +32,7 @@ const Navbar = () => {
                             <a class="nav-link" aria-current="page" href="#" data-uri="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-uri="/films">New Page</a>
+                            <a class="nav-link" href="#" data-uri="/films">Films</a>
                         </li>                        
                     </ul>
                 </div>
