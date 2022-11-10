@@ -1,3 +1,4 @@
+import Logout from '../Logout/Logout';
 import AddPizzaPage from '../Pages/AddPizzaPage';
 import HomePage from '../Pages/HomePage';
 import LoginPage from '../Pages/LoginPage';
@@ -8,7 +9,9 @@ const routes = {
     '/login': LoginPage,
     '/register': RegisterPage,
     '/add-pizza': AddPizzaPage,
+    '/logout': Logout,
 };
+
 
 const Router = () => {
     onFrontendLoad();
@@ -17,18 +20,19 @@ const Router = () => {
 };
 
 function onNavBarClick() {
-    const navItems = document.querySelectorAll('.nav-link');
+    const navbarWrapper = document.querySelector('#navbarWrapper');
 
-    navItems.forEach((item) => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const uri = e.target?.dataset?.uri;
+    navbarWrapper.addEventListener('click', (e) => {
+        e.preventDefault();
+        const navBarItemClicked = e.target;
+        const uri = navBarItemClicked?.dataset?.uri;
+        if (uri) {
             const componentToRender = routes[uri];
             if (!componentToRender) throw Error(`The ${uri} ressource does not exist.`);
 
             componentToRender();
             window.history.pushState({}, '', uri);
-        });
+        }
     });
 }
 

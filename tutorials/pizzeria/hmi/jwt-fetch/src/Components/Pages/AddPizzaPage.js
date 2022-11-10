@@ -1,3 +1,4 @@
+import { getAuthenticatedUser } from '../../utils/auths';
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navigate from '../Router/Navigate';
 
@@ -40,6 +41,8 @@ async function onAddPizza(e) {
     const title = document.querySelector('#title').value;
     const content = document.querySelector('#content').value;
 
+    const authenticatedUser = getAuthenticatedUser();
+
     const options = {
         method: 'POST',
         body: JSON.stringify({
@@ -48,17 +51,20 @@ async function onAddPizza(e) {
         }),
         headers: {
             'Content-Type': 'application/json',
+            Authorization: authenticatedUser.token,
         },
     };
 
-    const response = await fetch('/api/pizzas', options); // fetch return a promise => we wait for the response
+    const response = await fetch('/api/pizzas', options);
 
-    if (!response.ok)
-        throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+    if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
-    const newPizza = await response.json(); // json() returns a promise => we wait for the data
+    const newPizza = await response.json();
+
     console.log('New pizza added : ', newPizza);
+
     Navigate('/');
 }
 
 export default AddPizzaPage;
+
