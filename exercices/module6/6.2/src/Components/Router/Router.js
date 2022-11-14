@@ -25,7 +25,12 @@ function onNavBarClick() {
 function onHistoryChange() {
   window.addEventListener('popstate', () => {
     const uri = window.location.pathname;
-    const componentToRender = routes[uri];
+    let componentToRender;
+    if (uri.split("/")[1] === "film")
+      componentToRender = routes["/film"]
+    else
+      componentToRender = routes[uri];
+
     componentToRender();
   });
 }

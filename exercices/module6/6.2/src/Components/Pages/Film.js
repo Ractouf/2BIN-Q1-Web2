@@ -4,7 +4,7 @@ const Film = async () => {
     try {
         clearPage();
         const film = await getOneFilm();
-        console.log(film)
+        console.log(window.location.href, film);
     } catch (err) {
         console.error('HomePage::error: ', err);
     }

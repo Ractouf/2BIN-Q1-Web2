@@ -14,9 +14,14 @@ const Films = async () => {
     }
 
     const deleteButtons = document.querySelectorAll(".deleteFilm");
+    const modifyButtons = document.querySelectorAll(".modifyFilm");
 
     deleteButtons.forEach((item) => {
         item.addEventListener('click', onDeleteFilm);
+    });
+
+    modifyButtons.forEach((item) => {
+        item.addEventListener('click', onModifyFilm);
     });
 };
 
@@ -99,7 +104,7 @@ function getAllTableLines(menu) {
       <td>${film.duration}</td>
       <td>${film.budget}</td>
       <td>${film.linkFilm}</td>
-      <td><button class = "modifyFilm">Modify</button></td>
+      <td><button class = "modifyFilm" data-id = "${film.id}">Modify</button></td>
       <td><button class = "deleteFilm" data-id = "${film.id}">Delete</button></td>
     </tr>`;
     });
@@ -120,6 +125,14 @@ async function onDeleteFilm(e) {
         throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
     await Films();
+}
+
+function onModifyFilm(e) {
+    e.preventDefault();
+
+    const id = e.target?.dataset?.id;
+
+    Navigate(`/film/${id}`);
 }
 
 export default Films;
