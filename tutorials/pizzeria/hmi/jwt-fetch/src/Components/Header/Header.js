@@ -1,14 +1,14 @@
 import sound from '../../sound/Infecticide-11-Pizza-Spinoza.mp3';
 
 const Header = () => {
-    renderTitleAndWrapper();
-    renderAudioPlayer();
-    onBodyClick();
+  renderTitleAndWrapper();
+  renderAudioPlayer();
+  onBodyClick();
 };
 
 function renderTitleAndWrapper() {
-    const header = document.querySelector('header');
-    header.innerHTML = `<h1 class="animate__animated animate__bounce text-center">
+  const header = document.querySelector('header');
+  header.innerHTML = `<h1 class="animate__animated animate__bounce text-center">
   We love Pizza
   </h1>
   <div id="navbarWrapper">
@@ -17,9 +17,9 @@ function renderTitleAndWrapper() {
 }
 
 function renderAudioPlayer() {
-    const header = document.querySelector('header');
+  const header = document.querySelector('header');
 
-    header.innerHTML += `
+  header.innerHTML += `
   <div class="text-center">
     <audio id="audioPlayer" controls autoplay class="mt-3">
     <source src="${sound}" type="audio/mpeg" />
@@ -30,15 +30,15 @@ function renderAudioPlayer() {
 }
 
 function onBodyClick() {
-    const body = document.querySelector('body');
-    body.addEventListener('click', startOrStopSound);
+  const body = document.querySelector('body');
+  body.addEventListener('click', startOrStopSound);
 }
 
 function startOrStopSound() {
-    const myAudioPlayer = document.querySelector('#audioPlayer');
+  const myAudioPlayer = document.querySelector('#audioPlayer');
 
-    if (myAudioPlayer.paused) myAudioPlayer.play();
-    else myAudioPlayer.pause();
+  if (myAudioPlayer.paused) myAudioPlayer.play();
+  else myAudioPlayer.pause();
 }
 
 export default Header;

@@ -3,13 +3,13 @@ import { Navbar as BootstrapNavbar } from 'bootstrap';
 import { getAuthenticatedUser, isAuthenticated } from '../../utils/auths';
 
 const Navbar = () => {
-    renderNavbar();
+  renderNavbar();
 };
 
 function renderNavbar() {
-    const authenticatedUser = getAuthenticatedUser();
+  const authenticatedUser = getAuthenticatedUser();
 
-    const anonymousUserNavbar = `
+  const anonymousUserNavbar = `
 <nav class="navbar navbar-expand-lg navbar-light bg-danger">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">e-Pizzeria</a>
@@ -41,7 +41,7 @@ function renderNavbar() {
     </nav>
 `;
 
-    const authenticatedUserNavbar = `
+  const authenticatedUserNavbar = `
 <nav class="navbar navbar-expand-lg navbar-light bg-danger">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">e-Pizzeria</a>
@@ -76,9 +76,9 @@ function renderNavbar() {
     </nav>
 `;
 
-    const navbar = document.querySelector('#navbarWrapper');
+  const navbar = document.querySelector('#navbarWrapper');
 
-    navbar.innerHTML = isAuthenticated() ? authenticatedUserNavbar : anonymousUserNavbar;
+  navbar.innerHTML = isAuthenticated() ? authenticatedUserNavbar : anonymousUserNavbar;
 }
 
 export default Navbar;
