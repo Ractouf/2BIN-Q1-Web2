@@ -26,8 +26,10 @@ function onHistoryChange() {
   window.addEventListener('popstate', () => {
     const uri = window.location.pathname;
     let componentToRender;
-    if (uri.split("/")[1] === "film")
-      componentToRender = routes["/film"]
+    if (uri.split("/")[1] === "film" && uri.split("/")[2] !== "modify")
+      componentToRender = routes["/film"];
+    else if (uri.split("/")[2] === "modify")
+      componentToRender = routes["/film/modify"];
     else
       componentToRender = routes[uri];
 
@@ -38,7 +40,15 @@ function onHistoryChange() {
 function onFrontendLoad() {
   window.addEventListener('load', () => {
     const uri = window.location.pathname;
-    const componentToRender = routes[uri];
+    let componentToRender;
+
+    if (uri.split("/")[1] === "film" && uri.split("/")[2] !== "modify")
+      componentToRender = routes["/film"];
+    else if (uri.split("/")[2] === "modify")
+      componentToRender = routes["/film/modify"];
+    else
+      componentToRender = routes[uri];
+
     if (!componentToRender) throw Error(`The ${uri} ressource does not exist.`);
 
     componentToRender();

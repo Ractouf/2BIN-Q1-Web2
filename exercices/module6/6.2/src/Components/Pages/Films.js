@@ -7,6 +7,9 @@ const Films = async () => {
         const films = await getAllFilms();
 
         renderFilmTable(films);
+
+        displayAddFilm();
+
         renderGoBackHomeButton();
 
     } catch (err) {
@@ -15,6 +18,8 @@ const Films = async () => {
 
     const deleteButtons = document.querySelectorAll(".deleteFilm");
     const modifyButtons = document.querySelectorAll(".modifyFilm");
+    const goToButtons = document.querySelectorAll(".goToFilm");
+    const addFilmButton = document.querySelector("#addFilm");
 
     deleteButtons.forEach((item) => {
         item.addEventListener('click', onDeleteFilm);
@@ -23,6 +28,12 @@ const Films = async () => {
     modifyButtons.forEach((item) => {
         item.addEventListener('click', onModifyFilm);
     });
+
+    goToButtons.forEach((item) => {
+        item.addEventListener('click', onGoToFilm);
+    });
+
+    addFilmButton.addEventListener("click", onAddFilm);
 };
 
 function renderGoBackHomeButton() {
@@ -50,18 +61,6 @@ async function getAllFilms() {
         throw err;
     }
 }
-
-/*
-function goToFilm() {
-  const films = document.querySelectorAll('.film');
-  films.forEach((film) => {
-    film.addEventListener('click', () => {
-      console.log(film)
-      Navigate(`/films/1`)
-    })
-  })
-}
-*/
 
 function renderFilmTable(films) {
     const filmTable = getTable(films);
@@ -99,22 +98,25 @@ function getAllTableLines(menu) {
 
     menu?.forEach((film) => {
         tableLines += `
-    <tr class = "film">
-      <td>${film.title}</td>
-      <td>${film.duration}</td>
-      <td>${film.budget}</td>
-      <td>${film.linkFilm}</td>
-      <td><button class = "modifyFilm" data-id = "${film.id}">Modify</button></td>
-      <td><button class = "deleteFilm" data-id = "${film.id}">Delete</button></td>
-    </tr>`;
+            <tr class = "film">
+                <td class = "goToFilm" data-id = "${film.id}">${film.title}</td>
+                <td class = "goToFilm" data-id = "${film.id}">${film.duration}</td>
+                <td class = "goToFilm" data-id = "${film.id}">${film.budget}</td>
+                <td class = "goToFilm" data-id = "${film.id}">${film.linkFilm}</td>
+                <td><button class = "modifyFilm" data-id = "${film.id}">Modify</button></td>
+                <td><button class = "deleteFilm" data-id = "${film.id}">Delete</button></td>
+            </tr>`;
     });
 
     return tableLines;
 }
 
-async function onDeleteFilm(e) {
-    e.preventDefault();
+function displayAddFilm() {
+    const main = document.querySelector("main");
+    main.innerHTML += `<button id = "addFilm">Add film</button>`
+}
 
+async function onDeleteFilm(e) {
     const id = e.target?.dataset?.id;
 
     const response = await fetch(`/api/films/${id}`, {
@@ -128,11 +130,18 @@ async function onDeleteFilm(e) {
 }
 
 function onModifyFilm(e) {
-    e.preventDefault();
-
     const id = e.target?.dataset?.id;
+    Navigate(`/film/modify/${id}`);
+}
 
+function onGoToFilm(e) {
+    const id = e.target?.dataset?.id;
     Navigate(`/film/${id}`);
+}
+
+function onAddFilm(e) {
+    e.preventDefault();
+    Navigate(`/films/add`);
 }
 
 export default Films;

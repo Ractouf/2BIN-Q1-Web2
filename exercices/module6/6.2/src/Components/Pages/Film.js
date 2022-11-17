@@ -3,8 +3,9 @@ import {clearPage} from "../../utils/render";
 const Film = async () => {
     try {
         clearPage();
-        const film = await getOneFilm();
-        console.log(window.location.href, film);
+        const id = window.location.href.split("/")[4];
+        const film = await getOneFilm(id);
+        displayFilm(film);
     } catch (err) {
         console.error('HomePage::error: ', err);
     }
@@ -22,6 +23,15 @@ async function getOneFilm(id) {
         console.error('getAllFilms::error: ', err);
         throw err;
     }
+}
+
+function displayFilm(film) {
+    const main = document.querySelector("main");
+    main.innerHTML += `
+        <h1>${film.title}</h1>
+        <p>${film.duration}</p>
+        <p>${film.budget}</p>
+        <p>${film.linkFilm}</p>`;
 }
 
 export default Film;
